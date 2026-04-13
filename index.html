@@ -3,34 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Northwake</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="icon" href="images/favicon.ico" />
+  <title>Northwake — Digital Studio</title>
+  <meta name="description" content="Northwake is a minimalist digital studio specializing in clean, scalable web and mobile experiences.">
+  <link rel="icon" href="images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script defer src="https://cloud.umami.is/script.js" data-website-id="8b91c13a-1741-4610-928e-348ed407c286"></script>
 </head>
 <body>
-  <header>
-    <img 
-      src="images/hero.jpg" 
-      loading="lazy" 
-      decoding="async"
-      alt="Northwake Studio" 
-      class="hero-image"
-    >
+
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header class="topbar">
+    <span class="topbar__brand">NORTHWAKE</span>
+    <a href="mailto:hello@northwake.dev" class="topbar__contact">hello@northwake.dev</a>
   </header>
-  <main>
-    <div class="logo">NORTHWAKE</div>
-    <div class="content">
-      <p>We build clean, scalable digital experiences that let your brand shine.</p>
-      <p>Northwake is a minimalist digital studio specializing in web and mobile craftsmanship and intuitive UX. We believe simplicity drives clarity.</p>
-     
-      <p class="space-top">Reach us at <a href="mailto:hello@northwake.dev">hello@northwake.dev</a></p>
+
+  <main id="main-content" class="stage">
+
+    <div class="stage__info">
+      <p class="stage__counter" aria-live="polite">
+        <span class="stage__counter-current">01</span> / <span class="stage__counter-total">04</span>
+      </p>
+      <h1 class="stage__title">Habitori</h1>
+      <p class="stage__desc">Private habit tracker for iPhone and Apple Watch.</p>
+      <a href="https://habitori.app" class="stage__link" target="_blank" rel="noopener noreferrer">View Project <span aria-hidden="true">&rarr;</span></a>
     </div>
-    <div class="blob"></div>
+
+    <div class="carousel" role="region" aria-label="Project showcase" aria-roledescription="carousel">
+      <div class="carousel__viewport">
+
+        <article class="carousel__slide" data-index="0" data-hue="228" aria-current="true"
+                 data-title="Habitori"
+                 data-desc="Private habit tracker for iPhone and Apple Watch."
+                 data-href="https://habitori.app">
+          <div class="carousel__card carousel__card--has-image" style="--card-hue: 228;">
+            <img src="assets/habitori/hero.png" alt="Habitori app screens" class="carousel__card-image" loading="eager" decoding="async">
+            <img src="assets/habitori/habitkit-icon.png" alt="" class="carousel__card-icon" aria-hidden="true">
+          </div>
+        </article>
+
+        <article class="carousel__slide" data-index="1" data-hue="220"
+                 data-title="Project Beta"
+                 data-desc="Mobile-first product design with an emphasis on intuitive navigation."
+                 data-href="#">
+          <div class="carousel__card" style="--card-hue: 220;">
+            <span class="carousel__card-title" aria-hidden="true">Beta</span>
+          </div>
+        </article>
+
+        <article class="carousel__slide" data-index="2" data-hue="280"
+                 data-title="Project Gamma"
+                 data-desc="Brand identity and marketing site for an emerging fintech company."
+                 data-href="#">
+          <div class="carousel__card" style="--card-hue: 280;">
+            <span class="carousel__card-title" aria-hidden="true">Gamma</span>
+          </div>
+        </article>
+
+        <article class="carousel__slide" data-index="3" data-hue="30"
+                 data-title="Project Delta"
+                 data-desc="End-to-end development of a scalable internal tooling platform."
+                 data-href="#">
+          <div class="carousel__card" style="--card-hue: 30;">
+            <span class="carousel__card-title" aria-hidden="true">Delta</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
 
   </main>
-  <footer>&copy; 2025 Northwake. All rights reserved.</footer>
+
+  <footer class="bottombar">
+    <nav class="bottombar__nav" aria-label="Project navigation">
+      <button class="bottombar__dot is-active" data-goto="0" aria-label="Go to Habitori">01</button>
+      <button class="bottombar__dot" data-goto="1" aria-label="Go to Project Beta">02</button>
+      <button class="bottombar__dot" data-goto="2" aria-label="Go to Project Gamma">03</button>
+      <button class="bottombar__dot" data-goto="3" aria-label="Go to Project Delta">04</button>
+    </nav>
+    <p class="bottombar__hint" aria-hidden="true">Scroll to explore</p>
+    <p class="bottombar__copy">&copy; 2025 Northwake</p>
+  </footer>
+
+  <script src="script.js"></script>
   <script data-goatcounter="https://northwake.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
