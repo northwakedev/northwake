@@ -15,7 +15,7 @@
   <a href="#main-content" class="skip-link">Skip to content</a>
 
   <header class="topbar">
-    <span class="topbar__brand">NORTHWAKE</span>
+    <a href="index.html" class="topbar__brand">NORTHWAKE</a>
     <a href="mailto:hello@northwake.dev" class="topbar__contact">hello@northwake.dev</a>
   </header>
 
@@ -43,21 +43,24 @@
           </div>
         </article>
 
-        <article class="carousel__slide" data-index="1" data-hue="220"
-                 data-title="Project Beta"
-                 data-desc="Mobile-first product design with an emphasis on intuitive navigation."
-                 data-href="#">
-          <div class="carousel__card" style="--card-hue: 220;">
-            <span class="carousel__card-title" aria-hidden="true">Beta</span>
+        <article class="carousel__slide" data-index="1" data-hue="258"
+                 data-title="KanaFlip"
+                 data-desc="Learn hiragana and katakana on iPhone—flashcards, quizzes, spaced repetition, widget, and reminders."
+                 data-href="kanaflip/index.html">
+          <div class="carousel__card carousel__card--has-image carousel__card--image-contain carousel__card--kanaflip" style="--card-hue: 258;">
+            <div class="kanaflip-card__wash" aria-hidden="true">あかさたなはまやらわいきしちにひみりゐうくすつぬふむゆるえけせてねへめれおこそとのほもよろを</div>
+            <img src="assets/kanaflip/kanaflip-mockups.png" alt="KanaFlip: Home, Browse, Test, and Profile screens" class="carousel__card-image" loading="lazy" decoding="async">
+            <img src="assets/kanaflip/app-icon-128.png" alt="" class="carousel__card-icon" aria-hidden="true">
           </div>
         </article>
 
-        <article class="carousel__slide" data-index="2" data-hue="280"
-                 data-title="Project Gamma"
-                 data-desc="Brand identity and marketing site for an emerging fintech company."
-                 data-href="#">
-          <div class="carousel__card" style="--card-hue: 280;">
-            <span class="carousel__card-title" aria-hidden="true">Gamma</span>
+        <article class="carousel__slide" data-index="2" data-hue="145"
+                 data-title="Monthfold"
+                 data-desc="A digital planner built for people who think in months, not tasks."
+                 data-href="#"
+                 data-link-label="Coming Soon">
+          <div class="carousel__card carousel__card--has-image carousel__card--coming-soon" style="--card-hue: 145;">
+            <img src="assets/monthfold/monthfold.png" alt="Monthfold digital planner" class="carousel__card-image" loading="lazy" decoding="async">
           </div>
         </article>
 
@@ -78,8 +81,8 @@
   <footer class="bottombar">
     <nav class="bottombar__nav" aria-label="Project navigation">
       <button class="bottombar__dot is-active" data-goto="0" aria-label="Go to Habitori">01</button>
-      <button class="bottombar__dot" data-goto="1" aria-label="Go to Project Beta">02</button>
-      <button class="bottombar__dot" data-goto="2" aria-label="Go to Project Gamma">03</button>
+      <button class="bottombar__dot" data-goto="1" aria-label="Go to KanaFlip">02</button>
+      <button class="bottombar__dot" data-goto="2" aria-label="Go to Monthfold">03</button>
       <button class="bottombar__dot" data-goto="3" aria-label="Go to Project Delta">04</button>
     </nav>
     <p class="bottombar__hint" aria-hidden="true">Scroll to explore</p>

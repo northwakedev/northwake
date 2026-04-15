@@ -61,8 +61,21 @@
       slide.style.transform = `translateX(${tx}%) translateZ(${tz}px) scale(${s})`;
       slide.style.opacity = String(o);
       slide.style.filter = `blur(${blur}px)`;
-      slide.style.pointerEvents = offset === 0 ? "auto" : "none";
       slide.style.zIndex = String(z);
+
+      // The active slide spans the full viewport (inset: 0) at the highest
+      // z-index, so it would intercept clicks in areas where adjacent cards
+      // are visually visible. Setting pointer-events: none on the active slide
+      // element and restoring it on the card inside lets adjacent slides
+      // receive clicks while keeping the card's hover effect functional.
+      const card = slide.querySelector(".carousel__card");
+      if (offset === 0) {
+        slide.style.pointerEvents = "none";
+        if (card) card.style.pointerEvents = "auto";
+      } else {
+        slide.style.pointerEvents = "auto";
+        if (card) card.style.pointerEvents = "none";
+      }
     });
   }
 
@@ -72,17 +85,41 @@
     });
   }
 
+  function applyStageLinkHref(href) {
+    linkEl.href = href;
+    if (/^https?:\/\//i.test(href)) {
+      linkEl.target = "_blank";
+      linkEl.rel = "noopener noreferrer";
+    } else {
+      linkEl.removeAttribute("target");
+      linkEl.removeAttribute("rel");
+    }
+  }
+
+  function applyLinkLabel(label, href) {
+    const isComingSoon = Boolean(label) && href === "#";
+    if (isComingSoon) {
+      linkEl.textContent = label;
+      linkEl.classList.add("stage__link--coming-soon");
+    } else {
+      linkEl.innerHTML = `${label || "View Project"} <span aria-hidden="true">&rarr;</span>`;
+      linkEl.classList.remove("stage__link--coming-soon");
+    }
+  }
+
   function updateInfoPanel() {
     const slide = slides[activeIndex];
     const newTitle = slide.dataset.title;
     const newDesc = slide.dataset.desc;
     const newHref = slide.dataset.href;
+    const newLinkLabel = slide.dataset.linkLabel || null;
     const newCounter = padIndex(activeIndex);
 
     if (prefersReducedMotion) {
       titleEl.textContent = newTitle;
       descEl.textContent = newDesc;
-      linkEl.href = newHref;
+      applyStageLinkHref(newHref);
+      applyLinkLabel(newLinkLabel, newHref);
       counterCurrentEl.textContent = newCounter;
       return;
     }
@@ -92,7 +129,8 @@
     setTimeout(() => {
       titleEl.textContent = newTitle;
       descEl.textContent = newDesc;
-      linkEl.href = newHref;
+      applyStageLinkHref(newHref);
+      applyLinkLabel(newLinkLabel, newHref);
       counterCurrentEl.textContent = newCounter;
       infoPanel.classList.remove("is-transitioning");
     }, TRANSITION_MS * 0.45);

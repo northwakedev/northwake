@@ -110,6 +110,15 @@ button { font: inherit; border: none; background: none; cursor: pointer; color: 
   font-weight: 700;
   letter-spacing: 0.18em;
   color: var(--color-text);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.topbar__brand:hover {
+  color: var(--color-accent);
+}
+.topbar__brand:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 .topbar__contact {
@@ -324,6 +333,98 @@ button { font: inherit; border: none; background: none; cursor: pointer; color: 
   object-position: center 30%;
 }
 
+/* Wide / panoramic previews — show full asset without side crop */
+.carousel__card--image-contain .carousel__card-image {
+  object-fit: contain;
+  object-position: center center;
+}
+
+/* KanaFlip — vivid violet card */
+.carousel__card--kanaflip {
+  --kf-h: 262;
+  background:
+    radial-gradient(ellipse 130% 55% at 50% -8%,  hsla(var(--kf-h) 80% 72% / 0.55) 0%, transparent 50%),
+    radial-gradient(ellipse 90%  70% at -5% 105%, hsla(290 75% 60% / 0.40) 0%, transparent 52%),
+    radial-gradient(ellipse 70%  60% at 108% 95%, hsla(318 70% 62% / 0.32) 0%, transparent 50%),
+    radial-gradient(ellipse 60%  40% at 80%   5%, hsla(210 80% 70% / 0.18) 0%, transparent 45%),
+    linear-gradient(
+      158deg,
+      hsl(var(--kf-h) 38% 14%) 0%,
+      hsl(270 34% 10%) 50%,
+      hsl(280 28%  7%) 100%
+    );
+  border-color: hsla(var(--kf-h) 60% 70% / 0.18);
+}
+
+/* Diagonal stripe + glow overlays */
+.carousel__card--kanaflip::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 100% 50% at 50% 110%, hsla(var(--kf-h) 65% 42% / 0.5) 0%, transparent 60%),
+    radial-gradient(circle at 15% 15%, hsla(0, 0%, 100%, 0.10) 0%, transparent 30%),
+    radial-gradient(circle at 90% 28%, hsla(300 70% 75% / 0.12) 0%, transparent 25%),
+    repeating-linear-gradient(
+      -32deg,
+      transparent 0,
+      transparent 18px,
+      hsla(0, 0%, 100%, 0.025) 18px,
+      hsla(0, 0%, 100%, 0.025) 19px
+    );
+}
+
+/* Kana character wash */
+.kanaflip-card__wash {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  padding: var(--space-3);
+  gap: 0.1em;
+  font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  font-size: clamp(1.6rem, 3.8vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+  color: hsla(var(--kf-h) 70% 90% / 0.13);
+  transform: rotate(-8deg) scale(1.14) translateY(-4%);
+  transform-origin: center;
+  user-select: none;
+  transition: color 0.5s ease;
+}
+
+.carousel__slide[aria-current="true"] .carousel__card--kanaflip:hover .kanaflip-card__wash {
+  color: hsla(var(--kf-h) 70% 90% / 0.20);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .kanaflip-card__wash {
+    animation: kanaCardDrift 22s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes kanaCardDrift {
+  from { transform: rotate(-8deg) scale(1.14) translateY(-4%); }
+  to   { transform: rotate(-7deg) scale(1.16) translateY(-7%); }
+}
+
+.carousel__card--kanaflip .carousel__card-image {
+  z-index: 2;
+}
+
+.carousel__card--kanaflip .carousel__card-icon {
+  z-index: 3;
+}
+
+
 .carousel__card-icon {
   position: absolute;
   bottom: var(--space-4);
@@ -333,6 +434,34 @@ button { font: inherit; border: none; background: none; cursor: pointer; color: 
   border-radius: 10px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
   z-index: 1;
+}
+
+/* Coming soon badge */
+.carousel__card--coming-soon::after {
+  content: "Coming Soon";
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-bg);
+  background: var(--color-accent);
+  padding: 4px 10px;
+  border-radius: 999px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Coming soon link state */
+.stage__link--coming-soon {
+  color: var(--color-text-muted);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  cursor: default;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
 }
 
 /* Ambient glow behind active card */

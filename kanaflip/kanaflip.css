@@ -59,8 +59,8 @@ body.kanaflip-page {
     gap: var(--space-3);
   }
 
-  .kanaflip__hero-device {
-    padding: 1rem 0.5rem 1.35rem;
+  .kanaflip__hero-figure {
+    max-width: min(100%, 320px);
   }
 
   .kanaflip__footer {
@@ -249,7 +249,7 @@ body.kanaflip-page {
   flex-shrink: 0;
 }
 
-/* Hero: device frame + simulator screenshot */
+/* Hero: promotional illustration */
 .kanaflip__hero {
   display: flex;
   align-items: center;
@@ -260,126 +260,37 @@ body.kanaflip-page {
 .kanaflip__hero-figure {
   margin: 0;
   width: 100%;
-  max-width: min(100%, 220px);
+  max-width: min(100%, 380px);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.kanaflip__hero-device {
-  position: relative;
+.kanaflip__hero-art {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: clamp(0.75rem, 2vw, 1.35rem) clamp(0.35rem, 1.5vw, 0.65rem)
-    clamp(1.25rem, 3vw, 2rem);
-  perspective: 1180px;
-  perspective-origin: 52% 42%;
-  transform-style: preserve-3d;
-}
-
-/* Ground shadow — reads as contact with the “surface” under the tilt */
-.kanaflip__hero-device::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: clamp(0.5rem, 1.5vw, 1rem);
-  width: min(72%, 130px);
-  height: 14px;
-  transform: translateX(-48%) scaleY(0.55);
-  background: radial-gradient(
-    ellipse at center,
-    hsla(0, 0%, 0%, 0.5) 0%,
-    hsla(0, 0%, 0%, 0.22) 45%,
-    transparent 72%
-  );
-  filter: blur(14px);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.kanaflip__phone {
-  margin: 0;
-  width: min(100%, 180px);
-  border-radius: 20px;
-  padding: 6px;
-  background: linear-gradient(
-    145deg,
-    hsl(260 14% 24%) 0%,
-    hsl(225 12% 11%) 46%,
-    hsl(220 12% 9%) 100%
-  );
-  border: 1px solid hsla(0, 0%, 100%, 0.1);
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md);
   box-shadow:
-    /* Directional depth for the tilt (light from top-left) */
-    -16px 28px 40px rgba(0, 0, 0, 0.45),
-    -5px 14px 26px rgba(0, 0, 0, 0.35),
-    0 1px 0 hsla(0, 0%, 100%, 0.06) inset,
-    0 0 0 1px hsla(0, 0%, 0%, 0.35) inset,
-    0 0 42px hsla(var(--kanaflip-hue) 38% 48% / 0.14);
-  position: relative;
-  z-index: 1;
-  transform: rotateY(-12deg) rotateX(6deg) translateZ(12px);
-  transform-origin: 50% 50%;
-  backface-visibility: hidden;
-}
-
-/* Bezel glint — screen stacks above so the shot stays clean */
-.kanaflip__phone::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 0;
-  background: linear-gradient(
-    128deg,
-    hsla(0, 0%, 100%, 0.14) 0%,
-    hsla(0, 0%, 100%, 0.02) 28%,
-    transparent 46%,
-    transparent 62%,
-    hsla(260 20% 8% / 0.35) 100%
-  );
-  mix-blend-mode: soft-light;
+    0 24px 64px rgba(0, 0, 0, 0.45),
+    0 0 80px hsla(var(--kanaflip-hue) 40% 50% / 0.12);
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .kanaflip__phone {
+  .kanaflip__hero-art {
     transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
       box-shadow 0.65s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .kanaflip__hero-device:hover .kanaflip__phone {
-    transform: rotateY(-8deg) rotateX(4deg) translateZ(18px) translateY(-6px);
+  .kanaflip__hero-figure:hover .kanaflip__hero-art {
+    transform: translateY(-4px);
     box-shadow:
-      -13px 30px 46px rgba(0, 0, 0, 0.42),
-      -4px 17px 28px rgba(0, 0, 0, 0.32),
-      0 1px 0 hsla(0, 0%, 100%, 0.08) inset,
-      0 0 0 1px hsla(0, 0%, 0%, 0.3) inset,
-      0 0 48px hsla(var(--kanaflip-hue) 40% 52% / 0.18);
+      0 28px 72px rgba(0, 0, 0, 0.5),
+      0 0 96px hsla(var(--kanaflip-hue) 42% 52% / 0.16);
   }
 }
 
-.kanaflip__phone-screen {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  aspect-ratio: 720 / 1565;
-  border-radius: 16px;
-  overflow: hidden;
-  background: hsl(220 16% 6%);
-}
-
-.kanaflip__phone-shot {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  display: block;
-}
-
-.kanaflip__phone-caption {
+.kanaflip__hero-caption {
   margin: var(--space-3) 0 0;
   text-align: center;
   font-size: 0.65rem;
@@ -450,19 +361,10 @@ body.kanaflip-page {
   }
 
   .kanaflip__hero-figure {
-    max-width: min(100%, 200px);
+    max-width: min(100%, 280px);
   }
 
-  .kanaflip__phone {
-    width: min(148px, 48vw);
-    transform: rotateY(-7deg) rotateX(4deg) translateZ(8px);
-  }
-
-  .kanaflip__hero-device:hover .kanaflip__phone {
-    transform: rotateY(-5deg) rotateX(3deg) translateZ(12px) translateY(-4px);
-  }
-
-  .kanaflip__phone-caption {
+  .kanaflip__hero-caption {
     font-size: 0.6rem;
     padding: 0 var(--space-2);
   }
@@ -481,11 +383,11 @@ body.kanaflip-page {
   .kanaflip__cta {
     transition: none;
   }
-  .kanaflip__phone {
+  .kanaflip__hero-art {
     transition: none !important;
     transform: none !important;
   }
-  .kanaflip__hero-device:hover .kanaflip__phone {
+  .kanaflip__hero-figure:hover .kanaflip__hero-art {
     transform: none !important;
   }
 }
