@@ -155,7 +155,7 @@ body.kanaflip-page {
   grid-template-columns: minmax(260px, 1fr) minmax(280px, 1.05fr);
   align-items: center;
   gap: clamp(var(--space-4), 4vw, var(--space-7));
-  padding: 0 clamp(var(--space-4), 4vw, var(--space-8)) clamp(var(--space-3), 2vh, var(--space-5));
+  padding: clamp(var(--space-4), 2.5vh, var(--space-6)) clamp(var(--space-4), 4vw, var(--space-8)) clamp(var(--space-3), 2vh, var(--space-5));
   min-height: 0;
 }
 
@@ -338,7 +338,6 @@ body.kanaflip-page {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
     text-align: center;
-    padding-top: var(--space-2);
     gap: var(--space-4);
   }
 
