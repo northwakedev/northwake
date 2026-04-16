@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zappsum — Mental Math Training for iOS</title>
+  <meta name="description" content="Zappsum is a dark-themed mental math training app for iPhone. Compete in Speed Match battles, drill with spaced repetition flashcards, take structured tests, and track your personal rating.">
+  <link rel="canonical" href="https://northwake.dev/zappsum/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Northwake">
+  <meta property="og:title" content="Zappsum — Mental Math Training for iOS">
+  <meta property="og:description" content="Outthink. Outpace. Outscore. Speed Match battles, spaced repetition drills, and structured tests to make mental math second nature.">
+  <meta property="og:url" content="https://northwake.dev/zappsum/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://northwake.dev/assets/zappsum/zappsum-icon.png">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Zappsum — Mental Math Training for iOS">
+  <meta name="twitter:description" content="Outthink. Outpace. Outscore. Speed Match battles, spaced repetition drills, and structured tests.">
+  <meta name="twitter:image" content="https://northwake.dev/assets/zappsum/zappsum-icon.png">
+
+  <link rel="icon" href="../images/favicon.ico">
+  <link rel="apple-touch-icon" href="../assets/zappsum/zappsum-icon.png">
+  <link rel="preload" href="../assets/zappsum/zappsum-icon.png" as="image" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="zappsum.css">
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="8b91c13a-1741-4610-928e-348ed407c286"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Zappsum",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "iOS",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Northwake"
+    },
+    "image": "https://northwake.dev/assets/zappsum/zappsum-icon.png"
+  }
+  </script>
+</head>
+<body class="zappsum-page">
+
+  <a href="#zappsum-main" class="skip-link">Skip to content</a>
+
+  <div class="zappsum" aria-label="Zappsum product page">
+
+    <!-- Background math wash -->
+    <div class="zappsum__bg-wash" aria-hidden="true">
+      + × ÷ − + × ÷ − + × ÷ −
+      × ÷ − + × ÷ − + × ÷ − +
+      ÷ − + × ÷ − + × ÷ − + ×
+      − + × ÷ − + × ÷ − + × ÷
+      + × ÷ − + × ÷ − + × ÷ −
+      × ÷ − + × ÷ − + × ÷ − +
+    </div>
+
+    <header class="zappsum__topbar">
+      <a href="../index.html" class="zappsum__brand zappsum__brand-home">NORTHWAKE</a>
+      <span class="zappsum__brand zappsum__brand-lockup">
+        <img class="zappsum__brand-icon" src="../assets/zappsum/zappsum-icon.png" width="28" height="28" alt="" decoding="async">
+        <span class="zappsum__brand-name">Zappsum</span>
+      </span>
+    </header>
+
+    <main id="zappsum-main">
+
+      <!-- ============================================================
+           HERO
+           ============================================================ -->
+      <section class="zappsum__hero" aria-labelledby="zappsum-hero-heading">
+        <div class="zappsum__hero-glow" aria-hidden="true"></div>
+
+        <figure class="zappsum__hero-icon-wrap">
+          <img
+            class="zappsum__hero-icon"
+            src="../assets/zappsum/zappsum-icon.png"
+            width="180"
+            height="180"
+            alt="Zappsum app icon — a yellow lightning bolt on deep purple"
+            decoding="async"
+            fetchpriority="high"
+          >
+        </figure>
+
+        <div class="zappsum__hero-copy">
+          <p class="zappsum__eyebrow">iOS · Mental Math</p>
+          <h1 id="zappsum-hero-heading" class="zappsum__title">
+            Outthink.<br>Outpace.<br>Outscore.
+          </h1>
+          <p class="zappsum__lead">
+            Mental math that actually sticks. Compete against bots, drill your weak spots, and watch your rating climb.
+          </p>
+          <div class="zappsum__hero-actions">
+            <span class="zappsum__cta-soon">
+              <svg class="zappsum__cta-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+              </svg>
+              Coming to App Store
+            </span>
+            <p class="zappsum__hero-sub">Free to download · iOS</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           HOW IT WORKS
+           ============================================================ -->
+      <section class="zappsum__how" aria-labelledby="zappsum-how-heading">
+        <p class="zappsum__section-eyebrow" id="zappsum-how-heading">How It Works</p>
+        <h2 class="zappsum__section-title">Three steps to sharper math.</h2>
+
+        <ol class="zappsum__steps" aria-label="How Zappsum works">
+          <li class="zappsum__step">
+            <span class="zappsum__step-num" aria-hidden="true">01</span>
+            <div class="zappsum__step-body">
+              <h3 class="zappsum__step-title">Pass the Test</h3>
+              <p class="zappsum__step-desc">Take a 15-question test for each skill. Score 85% or above to unlock Speed Match for that topic.</p>
+            </div>
+          </li>
+          <li class="zappsum__step">
+            <span class="zappsum__step-num" aria-hidden="true">02</span>
+            <div class="zappsum__step-body">
+              <h3 class="zappsum__step-title">Drill the Gaps</h3>
+              <p class="zappsum__step-desc">Spaced repetition surfaces your weak cards first. Study lessons, work through examples, and run timed drills until the answers come fast.</p>
+            </div>
+          </li>
+          <li class="zappsum__step">
+            <span class="zappsum__step-num" aria-hidden="true">03</span>
+            <div class="zappsum__step-body">
+              <h3 class="zappsum__step-title">Enter Speed Match</h3>
+              <p class="zappsum__step-desc">Face off against bots in a timed battle. Win and your rating climbs. Lose and it drops. Your 1000-point rating is on the line every round.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ============================================================
+           MODES
+           ============================================================ -->
+      <section class="zappsum__modes" aria-labelledby="zappsum-modes-heading">
+        <p class="zappsum__section-eyebrow" id="zappsum-modes-heading">Core Modes</p>
+        <h2 class="zappsum__section-title">Built to train, not just practice.</h2>
+
+        <div class="zappsum__mode-grid">
+
+          <article class="zappsum__mode zappsum__mode--featured">
+            <div class="zappsum__mode-header">
+              <span class="zappsum__mode-icon" aria-hidden="true">⚡</span>
+              <h3 class="zappsum__mode-title">Speed Match</h3>
+            </div>
+            <p class="zappsum__mode-desc">Player vs. AI — timed battles across a chosen math topic. Beat bots to climb your personal rating, lose and it falls. Five opponents stand between you and the top rank.</p>
+            <ul class="zappsum__mode-detail-list" aria-label="Speed Match opponents">
+              <li class="zappsum__mode-detail"><span class="zappsum__bot-badge zappsum__bot--beginner">Pebble</span> Beginner</li>
+              <li class="zappsum__mode-detail"><span class="zappsum__bot-badge zappsum__bot--easy">Drift</span> Easy</li>
+              <li class="zappsum__mode-detail"><span class="zappsum__bot-badge zappsum__bot--medium">Spark</span> Medium</li>
+              <li class="zappsum__mode-detail"><span class="zappsum__bot-badge zappsum__bot--hard">Volt</span> Hard</li>
+              <li class="zappsum__mode-detail"><span class="zappsum__bot-badge zappsum__bot--expert">Blitz</span> Expert</li>
+            </ul>
+            <p class="zappsum__mode-note">Rating starts at 1000. Every match counts.</p>
+          </article>
+
+          <article class="zappsum__mode">
+            <div class="zappsum__mode-header">
+              <span class="zappsum__mode-icon" aria-hidden="true">◎</span>
+              <h3 class="zappsum__mode-title">Learn</h3>
+            </div>
+            <p class="zappsum__mode-desc">Structured lessons with worked examples, concepts, and tips — organized into course packs by topic. Build fluency before the pressure is on.</p>
+          </article>
+
+          <article class="zappsum__mode">
+            <div class="zappsum__mode-header">
+              <span class="zappsum__mode-icon" aria-hidden="true">▣</span>
+              <h3 class="zappsum__mode-title">Flashcard Drills</h3>
+            </div>
+            <p class="zappsum__mode-desc">Timed drill rounds powered by spaced repetition. Due cards surface first so you're always reinforcing the skills that need it most — not just the easy ones.</p>
+          </article>
+
+          <article class="zappsum__mode">
+            <div class="zappsum__mode-header">
+              <span class="zappsum__mode-icon" aria-hidden="true">◈</span>
+              <h3 class="zappsum__mode-title">Tests</h3>
+            </div>
+            <p class="zappsum__mode-desc">15 questions per skill level. Score 85% or above to pass and unlock Speed Match for that topic. No shortcuts — earn the right to compete.</p>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ============================================================
+           PROGRESS
+           ============================================================ -->
+      <section class="zappsum__progress" aria-labelledby="zappsum-progress-heading">
+        <div class="zappsum__progress-copy">
+          <p class="zappsum__section-eyebrow" id="zappsum-progress-heading">Progress &amp; Mastery</p>
+          <h2 class="zappsum__section-title">Your rating. Your record.</h2>
+          <p class="zappsum__progress-lead">Per-skill mastery flags, live due card counts, and a local rating that moves with every Speed Match. Know exactly where you stand — and what to work on next.</p>
+          <ul class="zappsum__progress-list" aria-label="Progress features">
+            <li>Live rating that shifts with every win and loss</li>
+            <li>Mastery flags per skill, earned through tests</li>
+            <li>Due card counts so you know what's next</li>
+            <li>Speed Match unlocked skill by skill as you pass</li>
+          </ul>
+        </div>
+        <div class="zappsum__progress-stat-col" aria-hidden="true">
+          <div class="zappsum__stat-card">
+            <span class="zappsum__stat-label">Rating</span>
+            <span class="zappsum__stat-value">1 <span class="zappsum__stat-accent">248</span></span>
+          </div>
+          <div class="zappsum__stat-card">
+            <span class="zappsum__stat-label">Skills Mastered</span>
+            <span class="zappsum__stat-value">7 <span class="zappsum__stat-unit">/ 12</span></span>
+          </div>
+          <div class="zappsum__stat-card">
+            <span class="zappsum__stat-label">Cards Due</span>
+            <span class="zappsum__stat-value zappsum__stat-value--due">14</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           CONTENT PACKS
+           ============================================================ -->
+      <section class="zappsum__packs" aria-labelledby="zappsum-packs-heading">
+        <p class="zappsum__section-eyebrow" id="zappsum-packs-heading">Content Packs</p>
+        <h2 class="zappsum__section-title">Start free. Go further.</h2>
+
+        <div class="zappsum__pack-grid">
+
+          <article class="zappsum__pack zappsum__pack--free">
+            <div class="zappsum__pack-header">
+              <div>
+                <h3 class="zappsum__pack-name">Foundations</h3>
+                <p class="zappsum__pack-sub">The building blocks of mental math.</p>
+              </div>
+              <span class="zappsum__pack-price">Free</span>
+            </div>
+            <p class="zappsum__pack-desc">Core arithmetic levels — the fundamentals every mental math session starts from. Included with the app, no purchase required.</p>
+            <ul class="zappsum__pack-includes" aria-label="Foundations pack contents">
+              <li>Addition fundamentals</li>
+              <li>Subtraction fundamentals</li>
+              <li>Multiplication tables</li>
+              <li>Division basics</li>
+            </ul>
+          </article>
+
+          <article class="zappsum__pack zappsum__pack--paid">
+            <div class="zappsum__pack-header">
+              <div>
+                <h3 class="zappsum__pack-name">Practical Math Pack</h3>
+                <p class="zappsum__pack-sub">Fractions, ratios, measurements — the math you actually use.</p>
+              </div>
+              <span class="zappsum__pack-price">$4.99</span>
+            </div>
+            <p class="zappsum__pack-desc">One-time purchase. Unlocks a full suite of real-world math skills that go beyond rote arithmetic.</p>
+            <ul class="zappsum__pack-includes" aria-label="Practical Math Pack contents">
+              <li>Fractions, Decimals &amp; Percent</li>
+              <li>Ratios, Proportions &amp; Unit Pricing</li>
+              <li>Measurements, Area &amp; Volume</li>
+              <li>And more</li>
+            </ul>
+            <span class="zappsum__pack-cta-note">Unlock the Full Pack →</span>
+          </article>
+
+          <article class="zappsum__pack zappsum__pack--upcoming">
+            <div class="zappsum__pack-header">
+              <div>
+                <h3 class="zappsum__pack-name">Advanced Math Pack</h3>
+                <p class="zappsum__pack-sub">Powers, algebra, and beyond.</p>
+              </div>
+              <span class="zappsum__pack-badge">Coming Soon</span>
+            </div>
+            <p class="zappsum__pack-desc">The next frontier. More advanced topics for those who want to push their mental math into new territory.</p>
+            <ul class="zappsum__pack-includes" aria-label="Advanced Math Pack preview">
+              <li>Mental multiplication strategies</li>
+              <li>Squares, powers &amp; roots</li>
+              <li>Negative numbers</li>
+              <li>Intro algebra &amp; equations</li>
+            </ul>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ============================================================
+           FINAL CTA
+           ============================================================ -->
+      <section class="zappsum__cta-section" aria-labelledby="zappsum-cta-heading">
+        <p class="zappsum__cta-kicker" aria-hidden="true">⚡</p>
+        <h2 id="zappsum-cta-heading" class="zappsum__cta-headline">Fast and clean beats lucky.</h2>
+        <p class="zappsum__cta-body">Zappsum is coming to iOS. Free to download, with optional content packs to go deeper.</p>
+        <span class="zappsum__cta-soon zappsum__cta-soon--large">
+          <svg class="zappsum__cta-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          Coming to App Store
+        </span>
+        <p class="zappsum__cta-platform">iOS · Free Download · dev.northwake.Zappsum</p>
+      </section>
+
+    </main>
+
+    <footer class="zappsum__footer">
+      <p class="zappsum__footer-tagline">Outthink. Outpace. Outscore.</p>
+      <div class="zappsum__footer-meta">
+        <span>&copy; 2026 Northwake</span>
+        <a href="../index.html">northwake.dev</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script data-goatcounter="https://northwake.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -1,0 +1,644 @@
+/* Monthfold — sub-route landing (extends ../styles.css tokens) */
+
+body.monthfold-page {
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100dvh;
+  height: auto;
+  display: block;
+}
+
+.monthfold {
+  --mf-hue: 145;
+  --mf-accent: hsl(var(--mf-hue) 45% 55%);
+  --mf-accent-soft: hsla(var(--mf-hue) 40% 50% / 0.12);
+  --mf-accent-glow: hsla(var(--mf-hue) 40% 50% / 0.08);
+
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+
+/* ================================================
+   TOP BAR
+   ================================================ */
+.monthfold__topbar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) clamp(var(--space-4), 4vw, var(--space-8));
+  flex-shrink: 0;
+}
+
+.monthfold__brand {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--color-text);
+}
+
+.monthfold__brand-name {
+  letter-spacing: 0.12em;
+}
+
+.monthfold__brand-home {
+  transition: color 0.25s ease;
+}
+.monthfold__brand-home:hover {
+  color: var(--mf-accent);
+}
+.monthfold__brand-home:focus-visible {
+  outline: 2px solid var(--mf-accent);
+  outline-offset: 3px;
+}
+
+
+/* ================================================
+   SECTION DEFAULTS
+   ================================================ */
+.monthfold__section-heading {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mf-accent);
+  margin-bottom: var(--space-4);
+}
+
+
+/* ================================================
+   HERO
+   ================================================ */
+.monthfold__hero {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(300px, 1.2fr);
+  align-items: center;
+  gap: clamp(var(--space-4), 4vw, var(--space-7));
+  padding: clamp(var(--space-4), 3vh, var(--space-6)) clamp(var(--space-4), 4vw, var(--space-8));
+  min-height: 0;
+}
+
+.monthfold__hero-copy {
+  max-width: 28rem;
+}
+
+.monthfold__eyebrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mf-accent);
+  margin-bottom: var(--space-3);
+}
+
+.monthfold__title {
+  font-size: clamp(1.85rem, 4.2vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  color: var(--color-text);
+  margin-bottom: var(--space-3);
+}
+
+.monthfold__lead {
+  font-size: clamp(0.88rem, 1.35vw, 1rem);
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  max-width: 26rem;
+}
+
+.monthfold__hero-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.monthfold__hero-figure {
+  margin: 0;
+  width: 100%;
+  max-width: min(100%, 540px);
+}
+
+.monthfold__hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md);
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.45),
+    0 0 80px var(--mf-accent-glow);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .monthfold__hero-img {
+    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .monthfold__hero-figure:hover .monthfold__hero-img {
+    transform: translateY(-4px);
+    box-shadow:
+      0 28px 72px rgba(0, 0, 0, 0.5),
+      0 0 96px hsla(var(--mf-hue) 42% 52% / 0.14);
+  }
+}
+
+
+/* ================================================
+   FEATURES
+   ================================================ */
+.monthfold__features {
+  padding: var(--space-7) clamp(var(--space-4), 4vw, var(--space-8));
+  border-top: 1px solid var(--color-border);
+}
+
+.monthfold__feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-5);
+}
+
+.monthfold__feature {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.015);
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.monthfold__feature:hover {
+  border-color: hsla(var(--mf-hue) 40% 50% / 0.25);
+  background: var(--mf-accent-glow);
+}
+
+.monthfold__feature-icon {
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: var(--space-3);
+  color: var(--mf-accent);
+  line-height: 1;
+}
+
+.monthfold__feature-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+}
+
+.monthfold__feature-desc {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+
+/* ================================================
+   PERSONALIZE
+   ================================================ */
+.monthfold__personalize {
+  padding: var(--space-7) clamp(var(--space-4), 4vw, var(--space-8));
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.monthfold__personalize-lead {
+  font-size: clamp(0.88rem, 1.2vw, 0.95rem);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: var(--space-5);
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.monthfold__theme-chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.monthfold__theme-chip {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: var(--space-2) var(--space-3);
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--color-text-muted);
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.monthfold__theme-chip--default  { --chip-hue: 210; }
+.monthfold__theme-chip--rose     { --chip-hue: 345; }
+.monthfold__theme-chip--forest   { --chip-hue: 145; }
+.monthfold__theme-chip--lavender { --chip-hue: 270; }
+.monthfold__theme-chip--ember    { --chip-hue: 15;  }
+.monthfold__theme-chip--citrus   { --chip-hue: 48;  }
+
+.monthfold__theme-chip:hover {
+  border-color: hsla(var(--chip-hue, 210) 50% 55% / 0.5);
+  color: hsl(var(--chip-hue, 210) 50% 70%);
+}
+
+
+/* ================================================
+   PLATFORM
+   ================================================ */
+.monthfold__platform {
+  padding: var(--space-7) clamp(var(--space-4), 4vw, var(--space-8));
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.monthfold__platform-text {
+  font-size: clamp(0.88rem, 1.2vw, 0.95rem);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+
+/* ================================================
+   EXTRAS
+   ================================================ */
+.monthfold__extras {
+  padding: var(--space-7) clamp(var(--space-4), 4vw, var(--space-8));
+  border-top: 1px solid var(--color-border);
+}
+
+.monthfold__extras-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-5);
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.monthfold__extra-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+}
+
+.monthfold__extra-desc {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+
+/* ================================================
+   CTA
+   ================================================ */
+.monthfold__cta-section {
+  padding: var(--space-7) clamp(var(--space-4), 4vw, var(--space-8));
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.monthfold__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: 0 var(--space-5);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #0a0a0b;
+  background: linear-gradient(
+    180deg,
+    hsl(var(--mf-hue) 42% 62%) 0%,
+    hsl(var(--mf-hue) 38% 48%) 100%
+  );
+  border-radius: var(--radius-md);
+  border: 1px solid hsla(var(--mf-hue) 40% 45% / 0.45);
+  box-shadow:
+    0 1px 0 hsla(0, 0%, 100%, 0.15) inset,
+    0 8px 32px hsla(var(--mf-hue) 40% 30% / 0.35);
+  transition: transform 0.2s var(--ease-out-expo), box-shadow 0.2s ease;
+}
+.monthfold__cta:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 0 hsla(0, 0%, 100%, 0.18) inset,
+    0 12px 40px hsla(var(--mf-hue) 40% 35% / 0.45);
+}
+.monthfold__cta:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.monthfold__cta-icon {
+  width: 1.1em;
+  height: 1.1em;
+  flex-shrink: 0;
+}
+
+
+/* ================================================
+   FOOTER
+   ================================================ */
+.monthfold__footer {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  padding: var(--space-5) clamp(var(--space-4), 4vw, var(--space-8));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.monthfold__footer-tagline {
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--color-text-muted);
+}
+
+.monthfold__footer-meta {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  display: flex;
+  gap: var(--space-4);
+}
+
+.monthfold__footer-meta a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+.monthfold__footer-meta a:hover {
+  color: var(--color-accent);
+}
+.monthfold__footer-meta a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+
+/* ================================================
+   RESPONSIVE
+   ================================================ */
+@media (max-width: 900px) {
+  .monthfold__hero {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    text-align: center;
+    gap: var(--space-4);
+  }
+
+  .monthfold__hero-copy {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .monthfold__lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .monthfold__hero-art {
+    order: -1;
+  }
+
+  .monthfold__hero-figure {
+    max-width: min(100%, 400px);
+    margin: 0 auto;
+  }
+
+  .monthfold__features {
+    padding-top: var(--space-5);
+    padding-bottom: var(--space-5);
+  }
+
+  .monthfold__personalize {
+    padding-top: var(--space-5);
+    padding-bottom: var(--space-5);
+  }
+}
+
+@media (max-width: 480px) {
+  .monthfold__feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .monthfold__extras-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .monthfold__cta {
+    transition: none;
+  }
+  .monthfold__hero-img {
+    transition: none !important;
+    transform: none !important;
+  }
+  .monthfold__hero-figure:hover .monthfold__hero-img {
+    transform: none !important;
+  }
+}
+
+
+/* ================================================
+   PRIVACY / DOCUMENT PAGE
+   ================================================ */
+body.monthfold-privacy-page {
+  overflow-y: auto;
+}
+
+.monthfold--doc {
+  height: auto;
+  max-height: none;
+  min-height: 100dvh;
+  overflow: visible;
+}
+
+.monthfold__doc-main {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: var(--space-6) clamp(var(--space-4), 6vw, var(--space-8)) var(--space-8);
+}
+
+.monthfold__policy {
+  width: 100%;
+  max-width: 42rem;
+}
+
+.monthfold__policy-header {
+  margin-bottom: var(--space-6);
+}
+
+.monthfold__policy-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  margin-top: var(--space-3);
+}
+
+.monthfold__policy-section {
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.monthfold__policy-section:last-child {
+  border-bottom: none;
+}
+
+.monthfold__policy-section--highlight {
+  background: hsla(var(--mf-hue) 40% 50% / 0.08);
+  border: 1px solid hsla(var(--mf-hue) 40% 50% / 0.18);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+.monthfold__policy-summary {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+.monthfold__policy-section h2 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mf-accent);
+  margin-bottom: var(--space-3);
+}
+
+.monthfold__policy-section p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+
+.monthfold__policy-section p:last-child {
+  margin-bottom: 0;
+}
+
+.monthfold__policy-section a {
+  color: var(--mf-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s ease;
+}
+
+.monthfold__policy-section a:hover {
+  opacity: 0.75;
+}
+
+.monthfold__policy-section a:focus-visible {
+  outline: 2px solid var(--mf-accent);
+  outline-offset: 2px;
+}
+
+.monthfold__policy-section ul {
+  margin: var(--space-3) 0;
+  padding-left: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.monthfold__policy-section li {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+}
+
+.monthfold__policy-section strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.monthfold__policy-contact {
+  font-style: normal;
+  margin-top: var(--space-3);
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: var(--color-text-muted);
+}
+
+.monthfold__policy-contact a {
+  color: var(--mf-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s ease;
+}
+
+.monthfold__policy-contact a:hover {
+  opacity: 0.75;
+}
+
+.monthfold__policy-contact a:focus-visible {
+  outline: 2px solid var(--mf-accent);
+  outline-offset: 2px;
+}
+
+/* Privacy page footer layout */
+.monthfold--doc .monthfold__footer {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+.monthfold--doc .monthfold__footer a {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  transition: color 0.2s ease;
+}
+
+.monthfold--doc .monthfold__footer a:hover {
+  color: var(--mf-accent);
+}
+
+.monthfold--doc .monthfold__footer span {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 900px) {
+  .monthfold__doc-main {
+    padding-top: var(--space-4);
+    padding-bottom: var(--space-6);
+  }
+
+  .monthfold--doc .monthfold__footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}

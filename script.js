@@ -142,6 +142,23 @@
     hint.classList.add("is-hidden");
   }
 
+  /** URL for card click: optional data-card-href overrides data-href (e.g. promo page while stage link is Coming Soon). */
+  function getSlideNavigateHref(slide) {
+    const cardHref = slide.dataset.cardHref;
+    const href = slide.dataset.href;
+    const url = (cardHref && cardHref.trim()) || (href && href.trim());
+    if (!url || url === "#") return null;
+    return url;
+  }
+
+  function navigateToProject(url) {
+    if (/^https?:\/\//i.test(url)) {
+      window.open(url, "_blank", "noopener,noreferrer");
+    } else {
+      window.location.assign(url);
+    }
+  }
+
   function goTo(index) {
     const clamped = Math.max(0, Math.min(total - 1, index));
     if (clamped === activeIndex) return;
@@ -213,11 +230,16 @@
     });
   });
 
-  /* --- Slide click to navigate --- */
+  /* --- Slide click: inactive = focus slide; active = open project URL --- */
   slides.forEach((slide) => {
     slide.addEventListener("click", () => {
       const idx = parseInt(slide.dataset.index, 10);
-      if (idx !== activeIndex) goTo(idx);
+      if (idx !== activeIndex) {
+        goTo(idx);
+        return;
+      }
+      const url = getSlideNavigateHref(slide);
+      if (url) navigateToProject(url);
     });
   });
 
