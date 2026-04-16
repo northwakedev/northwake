@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<!-- To update the App Store link: find the element with id="app-store-link" and replace href="#" with your listing URL. -->
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Ply — a focused knitting row and repeat counter for iPhone and Apple Watch. Home screen widgets, lock screen widgets, and watch complications included." />
+  <title>Ply — Knitting counter</title>
+  <link rel="icon" href="../images/favicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'media' };
+  </script>
+  <style>
+    /* ── Color tokens ─────────────────────────────── */
+    :root {
+      --accent:        #d29e7b;
+      --accent-glow:   rgba(210, 158, 123, 0.18);
+      --bg:            #f7ede2;
+      --surface:       #f0e3d1;
+      --surface-2:     #e8d5c2;
+      --text:          #2b1a15;
+      --muted:         rgba(43, 26, 21, 0.56);
+      --border:        rgba(43, 26, 21, 0.09);
+      --shadow-color:  43, 26, 21;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --accent-glow:  rgba(210, 158, 123, 0.12);
+        --bg:           #0d0b09;
+        --surface:      #1e1b16;
+        --surface-2:    #27231c;
+        --text:         #f0ebe4;
+        --muted:        rgba(240, 235, 228, 0.54);
+        --border:       rgba(240, 235, 228, 0.07);
+        --shadow-color: 0, 0, 0;
+      }
+    }
+
+    /* ── Base ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* ── Buttons ──────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-radius: 0.875rem;
+      padding: 0.875rem 1.625rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.15s, transform 0.1s;
+      cursor: pointer;
+    }
+    .btn:hover  { opacity: 0.86; }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary {
+      background-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(var(--shadow-color), 0.18), 0 1px 4px rgba(var(--shadow-color), 0.12);
+    }
+
+    /* ── Hero ─────────────────────────────────────── */
+    .hero {
+      background:
+        radial-gradient(ellipse 55% 75% at 75% 50%, var(--accent-glow) 0%, transparent 68%),
+        var(--bg);
+    }
+
+    /* ── Icon + ring ──────────────────────────────── */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+    .icon-wrap { animation: float 6s ease-in-out infinite; }
+
+    @keyframes ring-fill {
+      from { stroke-dashoffset: 817; }
+      to   { stroke-dashoffset: 216; }
+    }
+    .ring-arc {
+      stroke-dasharray: 817;
+      stroke-dashoffset: 216;
+      animation: ring-fill 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
+    }
+
+    .app-icon {
+      position: relative;
+      z-index: 10;
+      width: 178px;
+      height: 178px;
+      border-radius: 22%;
+      box-shadow:
+        0 28px 60px rgba(var(--shadow-color), 0.22),
+        0 6px 18px rgba(var(--shadow-color), 0.1);
+    }
+
+    /* ── Feature cards ────────────────────────────── */
+    .card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      padding: 1.75rem;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(var(--shadow-color), 0.1);
+    }
+    .icon-badge {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 0.75rem;
+      background: rgba(210, 158, 123, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.125rem;
+      flex-shrink: 0;
+    }
+
+    /* ── Strip ────────────────────────────────────── */
+    .strip {
+      background-color: var(--surface-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── CTA ──────────────────────────────────────── */
+    .cta-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      padding: clamp(2.5rem, 5vw, 4rem) clamp(1.75rem, 5vw, 3.5rem);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ── Privacy ──────────────────────────────────── */
+    .privacy-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.875rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .privacy-list li {
+      display: flex;
+      gap: 0.875rem;
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+    .privacy-list li .dash {
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+      font-weight: 300;
+    }
+
+    /* ── Privacy section: suppress browser focus outline on anchor-link scroll ── */
+    #privacy:focus { outline: none; }
+
+    .privacy-inner {
+      max-width: min(85ch, 100%);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── Responsive helpers ───────────────────────── */
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 1.25rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ════════════════════════════════════════════════
+       NAV
+  ════════════════════════════════════════════════ -->
+  <header style="background:var(--bg); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:50; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);">
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; padding-top:1rem; padding-bottom:1rem;">
+      <a href="../index.html" style="font-size:0.8rem; font-weight:700; letter-spacing:0.18em; color:var(--text); text-decoration:none; transition:color 0.2s ease;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text)'">NORTHWAKE</a>
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <img
+          src="../assets/ply/app-icon.png"
+          alt="" aria-hidden="true"
+          style="width:26px; height:26px; border-radius:22%; flex-shrink:0;"
+        />
+        <span style="font-weight:600; font-size:0.9375rem; letter-spacing:-0.01em; color:var(--text); transition:color 0.2s ease;" id="ply-brand" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text)'">Ply</span>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ════════════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════════════ -->
+  <section class="hero" aria-labelledby="hero-h1">
+    <div class="container" style="padding-top: clamp(3.5rem, 8vw, 6rem); padding-bottom: clamp(3.5rem, 8vw, 6rem);">
+      <div style="display:grid; grid-template-columns:1fr; gap:3rem; align-items:center;">
+
+        <!-- Text -->
+        <div style="max-width: 44ch;">
+          <div style="display:inline-flex; align-items:center; background:rgba(210,158,123,0.13); border:1px solid rgba(210,158,123,0.3); color:var(--accent); border-radius:99px; padding:0.375rem 0.875rem; font-size:0.72rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:1.75rem;">
+            iPhone &nbsp;·&nbsp; Apple Watch &nbsp;·&nbsp; Widgets
+          </div>
+          <h1 id="hero-h1" style="font-family: Georgia, 'Times New Roman', serif; font-size: clamp(2.75rem, 6vw, 4rem); font-weight: 400; line-height: 1.08; letter-spacing: -0.025em; color: var(--text); margin: 0 0 1.375rem; text-wrap: balance;">
+            Never lose<br>your row again.
+          </h1>
+          <p style="font-size: clamp(1rem, 1.5vw, 1.125rem); line-height: 1.75; color: var(--muted); margin: 0 0 2.25rem; max-width: 36ch;">
+            Ply is a focused row and repeat counter for knitters, clean and calm, always in reach on your phone, wrist and home screen.
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center;">
+            <a id="app-store-link" href="#" class="btn btn-primary">
+              <!-- Apple mark (text-only; replace logo below if preferred) -->
+              Download on the App Store
+            </a>
+          </div>
+          <p style="font-size:0.78rem; color:var(--muted); margin-top:0.875rem;">One-time purchase &nbsp;·&nbsp; iPhone &amp; Apple Watch</p>
+        </div>
+
+        <!-- Icon + ring (hidden on small screens via CSS grid column; visible on md+) -->
+        <div style="display:none;" id="hero-visual" aria-hidden="true">
+          <div class="icon-wrap" style="position:relative; width:280px; height:280px; display:flex; align-items:center; justify-content:center; margin:0 auto;">
+            <!-- Counter ring (decorative, mirrors in-app progress ring) -->
+            <svg style="position:absolute; inset:0; width:100%; height:100%;" viewBox="0 0 280 280" fill="none">
+              <!-- Track -->
+              <circle cx="140" cy="140" r="130" stroke="var(--accent)" stroke-width="2.5" opacity="0.13"/>
+              <!-- Progress arc -->
+              <circle
+                cx="140" cy="140" r="130"
+                stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"
+                class="ring-arc"
+                transform="rotate(-90 140 140)"
+              />
+              <!-- Subtle inner ring -->
+              <circle cx="140" cy="140" r="106" stroke="var(--accent)" stroke-width="1" opacity="0.07"/>
+            </svg>
+            <!-- App icon -->
+            <img
+              src="../assets/ply/app-icon.png"
+              alt="Ply app icon"
+              class="app-icon"
+            />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Show hero visual only when there's room (768px+)
+    (function () {
+      var el = document.getElementById('hero-visual');
+      var hero = el.parentElement;
+      function update() {
+        if (window.innerWidth >= 768) {
+          el.style.display = 'flex';
+          el.style.justifyContent = 'flex-end';
+          hero.style.gridTemplateColumns = '1fr 1fr';
+        } else {
+          el.style.display = 'none';
+          hero.style.gridTemplateColumns = '1fr';
+        }
+      }
+      update();
+      window.addEventListener('resize', update);
+    })();
+  </script>
+
+
+  <!-- ════════════════════════════════════════════════
+       QUOTE STRIP
+  ════════════════════════════════════════════════ -->
+  <div class="strip">
+    <div class="container" style="padding-top:2.5rem; padding-bottom:2.5rem; text-align:center;">
+      <p style="font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.125rem, 2.5vw, 1.5rem); font-style: italic; line-height: 1.55; color: var(--text); max-width: 40ch; margin: 0 auto;">
+        "One tap forward. One tap back.<br>Focus on the knitting."
+      </p>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════
+       FEATURES
+  ════════════════════════════════════════════════ -->
+  <main id="main">
+    <section aria-labelledby="features-h2" style="padding: clamp(3rem, 6vw, 5rem) 0;">
+      <div class="container">
+        <p id="features-h2" style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent); text-align:center; margin:0 0 2.75rem;">What's inside</p>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+
+          <!-- iPhone -->
+          <div class="card">
+            <div class="icon-badge" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <rect x="4.5" y="1.5" width="11" height="17" rx="2.5" stroke="var(--accent)" stroke-width="1.5"/>
+                <circle cx="10" cy="15.5" r="0.75" fill="var(--accent)"/>
+                <line x1="7.5" y1="3.75" x2="12.5" y2="3.75" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 style="font-weight:600; font-size:0.9375rem; color:var(--text); margin:0 0 0.5rem;">Counter on your phone</h3>
+            <p style="font-size:0.875rem; line-height:1.7; color:var(--muted); margin:0;">One project, one counter. Track rows and repeats with a clean, distraction-free interface. Let Ply auto-advance your repeat count when you hit your row goal.</p>
+          </div>
+
+          <!-- Watch -->
+          <div class="card">
+            <div class="icon-badge" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <rect x="4" y="5" width="12" height="10" rx="2.5" stroke="var(--accent)" stroke-width="1.5"/>
+                <rect x="6.5" y="1.5" width="7" height="4" rx="1.25" stroke="var(--accent)" stroke-width="1.5"/>
+                <rect x="6.5" y="14.5" width="7" height="4" rx="1.25" stroke="var(--accent)" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h3 style="font-weight:600; font-size:0.9375rem; color:var(--text); margin:0 0 0.5rem;">Counter on your wrist</h3>
+            <p style="font-size:0.875rem; line-height:1.7; color:var(--muted); margin:0;">Ply runs natively on Apple Watch and syncs with your iPhone. Tap a count without putting down your needles.</p>
+          </div>
+
+          <!-- Widgets -->
+          <div class="card">
+            <div class="icon-badge" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <rect x="2" y="2" width="7" height="7" rx="1.5" stroke="var(--accent)" stroke-width="1.5"/>
+                <rect x="11" y="2" width="7" height="7" rx="1.5" stroke="var(--accent)" stroke-width="1.5"/>
+                <rect x="2" y="11" width="7" height="7" rx="1.5" stroke="var(--accent)" stroke-width="1.5"/>
+                <rect x="11" y="11" width="7" height="7" rx="1.5" stroke="var(--accent)" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h3 style="font-weight:600; font-size:0.9375rem; color:var(--text); margin:0 0 0.5rem;">Glanceable, everywhere</h3>
+            <p style="font-size:0.875rem; line-height:1.7; color:var(--muted); margin:0;">Home screen widgets show your current row and let you tap the counter right from your home screen. Watch complications give you a one-tap shortcut into the app on your wrist.</p>
+          </div>
+
+          <!-- Privacy -->
+          <div class="card">
+            <div class="icon-badge" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M10 2L3.5 5v4.5C3.5 13.4 6.4 17 10 18c3.6-1 6.5-4.6 6.5-8.5V5L10 2z" stroke="var(--accent)" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M7.5 10.5l2 2 3.5-3.5" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 style="font-weight:600; font-size:0.9375rem; color:var(--text); margin:0 0 0.5rem;">Your data, on your devices</h3>
+            <p style="font-size:0.875rem; line-height:1.7; color:var(--muted); margin:0;">Projects live on your iPhone and Watch, not on our servers. No account required, no analytics, no third-party tracking.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════
+         CTA
+    ════════════════════════════════════════════════ -->
+    <section style="padding: 0 0 clamp(3rem, 6vw, 5rem);" aria-labelledby="cta-h2">
+      <div class="container">
+        <div class="cta-card">
+
+          <!-- Decorative ring echo in CTA -->
+          <div aria-hidden="true" style="position:absolute; left:-3rem; top:50%; transform:translateY(-50%); opacity:0.04; pointer-events:none;">
+            <svg width="220" height="220" viewBox="0 0 220 220" fill="none">
+              <circle cx="110" cy="110" r="100" stroke="var(--accent)" stroke-width="40"/>
+            </svg>
+          </div>
+
+          <div style="position:relative; z-index:10;">
+            <p style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent); margin:0 0 1rem;">Available now</p>
+            <h2 id="cta-h2" style="font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.875rem, 4vw, 2.75rem); font-weight:400; line-height:1.15; letter-spacing:-0.02em; color:var(--text); margin:0 0 1.125rem; text-wrap:balance;">
+              Start knitting<br>with confidence.
+            </h2>
+            <a href="#" class="btn btn-primary">
+              Download on the App Store
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <!-- ════════════════════════════════════════════════
+       PRIVACY POLICY
+  ════════════════════════════════════════════════ -->
+  <section id="privacy" aria-labelledby="privacy-h2" tabindex="-1" style="border-top:1px solid var(--border); padding: clamp(3rem, 6vw, 5rem) 0;">
+    <div class="container">
+      <div class="privacy-inner">
+      <h2 id="privacy-h2" style="font-size:1.5rem; font-weight:650; letter-spacing:-0.015em; color:var(--text); margin:0 0 0.4rem; text-align:center;">Privacy Policy</h2>
+      <p style="font-size:0.875rem; color:var(--muted); margin:0 0 2.75rem; text-align:center;">Last updated: April 12, 2026 &nbsp;·&nbsp; Northwake</p>
+
+      <div style="display:flex; flex-direction:column; gap:2.25rem;">
+
+        <p style="font-size:0.9375rem; line-height:1.75; color:var(--muted); margin:0;">
+          Northwake built Ply as a focused tool for knitters. This page explains what information the app uses, how it is stored, and what rights you have. We have kept things simple because there is genuinely very little to explain.
+        </p>
+
+        <div>
+          <h3 style="font-size:1rem; font-weight:600; color:var(--text); margin:0 0 0.625rem;">What we collect</h3>
+          <p style="font-size:0.9375rem; line-height:1.75; color:var(--muted); margin:0;">
+            Ply does <strong style="color:var(--text);">not</strong> collect any personal data. We do not track you, we do not link any information to your identity, and we do not share anything with third parties for advertising or measurement. No account is required to use the app, and we do not integrate any third-party analytics or advertising SDKs.
+          </p>
+        </div>
+
+        <div>
+          <h3 style="font-size:1rem; font-weight:600; color:var(--text); margin:0 0 0.875rem;">How your data is stored on device</h3>
+          <p style="font-size:0.9375rem; line-height:1.75; color:var(--muted); margin:0 0 1rem;">All data created in Ply is stored locally on your own devices using Apple's platform APIs and is protected by your device's built-in security and encryption.</p>
+          <ul class="privacy-list">
+            <li>
+              <span class="dash" aria-hidden="true">—</span>
+              <span><strong style="color:var(--text);">Projects.</strong> Row and repeat counts and related project data are stored locally using Apple's SwiftData persistence on your devices.</span>
+            </li>
+            <li>
+              <span class="dash" aria-hidden="true">—</span>
+              <span><strong style="color:var(--text);">Preferences.</strong> App preferences such as appearance mode and which project was last opened are stored using UserDefaults on device for app functionality.</span>
+            </li>
+            <li>
+              <span class="dash" aria-hidden="true">—</span>
+              <span><strong style="color:var(--text);">Widget.</strong> The iPhone app and widget extension share a small amount of data through Apple's App Group container so widgets can display your last-opened project. This data stays on your device.</span>
+            </li>
+            <li>
+              <span class="dash" aria-hidden="true">—</span>
+              <span><strong style="color:var(--text);">Apple Watch.</strong> When you use Ply on a paired Apple Watch, project data syncs between your iPhone and that watch using Apple's WatchConnectivity framework. This is a direct device-to-device transfer over Apple's system and is not sent to Northwake servers.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 style="font-size:1rem; font-weight:600; color:var(--text); margin:0 0 0.625rem;">Your rights under GDPR</h3>
+          <p style="font-size:0.9375rem; line-height:1.75; color:var(--muted); margin:0;">
+            Northwake is based in the EU and this app may be used by people in the European Economic Area. Because Ply does not collect or process any personal data, there is no personal data for us to provide, correct, or delete on our end. If you have any questions about your rights under the General Data Protection Regulation, please contact us at the address below.
+          </p>
+        </div>
+
+        <div>
+          <h3 style="font-size:1rem; font-weight:600; color:var(--text); margin:0 0 0.625rem;">Changes to this policy</h3>
+          <p style="font-size:0.9375rem; line-height:1.75; color:var(--muted); margin:0;">
+            We may update this policy from time to time. The "Last updated" date at the top will reflect any changes. Continued use of the app after an update constitutes acceptance of the revised policy.
+          </p>
+        </div>
+
+        <div>
+          <h3 style="font-size:1rem; font-weight:600; color:var(--text); margin:0 0 0.625rem;">Contact</h3>
+          <p style="font-size:0.9375rem; line-height:1.75; color:var(--muted); margin:0;">
+            For any privacy questions or requests, email us at <a href="mailto:hello@northwake.dev" style="color:var(--accent); text-decoration:none; font-weight:500;">hello@northwake.dev</a>.
+          </p>
+        </div>
+
+
+      </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════════════ -->
+  <footer style="border-top:1px solid var(--border); padding:1.25rem 0;">
+    <div class="container" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:1rem 2rem;">
+      <span style="font-size:0.7rem; color:var(--muted);">iPhone &amp; Apple Watch</span>
+      <span style="font-size:0.7rem; color:var(--muted);">Light · Dark · System</span>
+      <a href="#privacy" style="font-size:0.7rem; color:var(--muted); text-decoration:underline; text-underline-offset:3px; transition:color 0.2s ease;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">Privacy</a>
+      <span style="font-size:0.7rem; color:var(--muted);">© 2026 Northwake</span>
+    </div>
+  </footer>
+
+</body>
+</html>
