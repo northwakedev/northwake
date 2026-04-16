@@ -106,6 +106,45 @@
             <p class="zappsum__hero-sub">Free to download · iOS</p>
           </div>
         </div>
+
+        <!-- Live Speed Match demo -->
+        <div class="zs-demo" aria-hidden="true">
+          <div class="zs-demo__card">
+            <div class="zs-demo__topbar">
+              <span class="zs-demo__mode-label">⚡ Speed Match</span>
+              <span class="zs-demo__timer" id="zs-timer">00:15</span>
+            </div>
+
+            <div class="zs-demo__versus">
+              <div class="zs-demo__player zs-demo__player--you">
+                <span class="zs-demo__player-name">You</span>
+                <span class="zs-demo__player-rating" id="zs-rating">1,248</span>
+              </div>
+              <div class="zs-demo__vs-divider">vs</div>
+              <div class="zs-demo__player zs-demo__player--bot">
+                <span class="zs-demo__player-name">Volt</span>
+                <span class="zs-demo__player-rating">1,310</span>
+              </div>
+            </div>
+
+            <div class="zs-demo__question-wrap">
+              <p class="zs-demo__question" id="zs-question">12 × 8 = ?</p>
+              <span class="zs-demo__result-badge" id="zs-result"></span>
+            </div>
+
+            <div class="zs-demo__choices" id="zs-choices">
+              <button class="zs-demo__choice" tabindex="-1">96</button>
+              <button class="zs-demo__choice" tabindex="-1">84</button>
+              <button class="zs-demo__choice" tabindex="-1">108</button>
+              <button class="zs-demo__choice" tabindex="-1">88</button>
+            </div>
+
+            <div class="zs-demo__progress-bar">
+              <div class="zs-demo__progress-fill" id="zs-progress"></div>
+            </div>
+          </div>
+          <p class="zs-demo__caption">Live Speed Match preview</p>
+        </div>
       </section>
 
       <!-- ============================================================
@@ -300,7 +339,7 @@
           </svg>
           Coming to App Store
         </span>
-        <p class="zappsum__cta-platform">iOS · Free Download · dev.northwake.Zappsum</p>
+        <p class="zappsum__cta-platform">iOS · Free Download</p>
       </section>
 
     </main>
@@ -310,11 +349,129 @@
       <div class="zappsum__footer-meta">
         <span>&copy; 2026 Northwake</span>
         <a href="../index.html">northwake.dev</a>
+        <a href="privacy.html">Privacy</a>
       </div>
     </footer>
 
   </div>
 
   <script data-goatcounter="https://northwake.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+  <script>
+  (() => {
+    const PROBLEMS = [
+      { q: '12 × 8 = ?',   answer: 96,  choices: [96, 84, 108, 88]   },
+      { q: '144 ÷ 12 = ?', answer: 12,  choices: [11, 16, 12, 14]    },
+      { q: '15 × 7 = ?',   answer: 105, choices: [95, 105, 100, 112]  },
+      { q: '63 + 48 = ?',  answer: 111, choices: [101, 121, 103, 111] },
+      { q: '256 ÷ 8 = ?',  answer: 32,  choices: [28, 36, 32, 24]    },
+      { q: '17 × 6 = ?',   answer: 102, choices: [92, 102, 108, 96]   },
+    ];
+
+    const elTimer    = document.getElementById('zs-timer');
+    const elQuestion = document.getElementById('zs-question');
+    const elChoices  = document.getElementById('zs-choices');
+    const elResult   = document.getElementById('zs-result');
+    const elRating   = document.getElementById('zs-rating');
+    const elProgress = document.getElementById('zs-progress');
+
+    if (!elTimer) return;
+
+    let problemIdx = 0;
+    let rating = 1248;
+    let countdownInterval = null;
+    let timeouts = [];
+
+    function after(ms, fn) {
+      const id = setTimeout(fn, ms);
+      timeouts.push(id);
+    }
+
+    function clearAll() {
+      timeouts.forEach(clearTimeout);
+      timeouts = [];
+      if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
+    }
+
+    function runCycle() {
+      clearAll();
+
+      const problem = PROBLEMS[problemIdx % PROBLEMS.length];
+      problemIdx++;
+
+      // Reset state
+      elQuestion.classList.remove('is-entering');
+      elResult.textContent = '';
+      elResult.className = 'zs-demo__result-badge';
+      elProgress.style.width = '100%';
+
+      // Populate choices
+      elChoices.innerHTML = '';
+      problem.choices.forEach(val => {
+        const btn = document.createElement('button');
+        btn.className = 'zs-demo__choice';
+        btn.textContent = val;
+        btn.tabIndex = -1;
+        elChoices.appendChild(btn);
+      });
+
+      // Animate question in
+      void elQuestion.offsetWidth;
+      elQuestion.textContent = problem.q;
+      elQuestion.classList.add('is-entering');
+
+      // Countdown timer from 15
+      let secs = 15;
+      elTimer.textContent = '00:15';
+      elTimer.classList.remove('is-urgent');
+
+      countdownInterval = setInterval(() => {
+        secs--;
+        if (secs < 0) { clearInterval(countdownInterval); return; }
+        elTimer.textContent = '00:' + String(secs).padStart(2, '0');
+        if (secs <= 5) elTimer.classList.add('is-urgent');
+        // Shrink progress bar proportionally
+        elProgress.style.width = ((secs / 15) * 100) + '%';
+      }, 1000);
+
+      // After 2.8s — "answer" the question
+      after(2800, () => {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+
+        const choiceBtns = elChoices.querySelectorAll('.zs-demo__choice');
+        choiceBtns.forEach(btn => {
+          if (Number(btn.textContent) === problem.answer) {
+            btn.classList.add('is-correct');
+          } else {
+            btn.classList.add('is-dim');
+          }
+        });
+        elProgress.style.width = '0%';
+        elTimer.textContent = '00:07';
+      });
+
+      // After 3.8s — show rating bump
+      after(3800, () => {
+        rating += 12;
+        elRating.textContent = rating.toLocaleString();
+        elResult.textContent = '+12';
+        elResult.classList.add('is-win');
+      });
+
+      // After 5.8s — fade out, next problem
+      after(5800, () => {
+        elQuestion.classList.remove('is-entering');
+        elResult.classList.remove('is-win');
+        elTimer.classList.remove('is-urgent');
+
+        after(400, runCycle);
+      });
+    }
+
+    // Kick off after a short pause so the page can settle
+    after(800, runCycle);
+  })();
+  </script>
 </body>
 </html>
