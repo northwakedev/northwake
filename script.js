@@ -18,6 +18,12 @@
   const linkEl = document.querySelector(".stage__link");
   const counterCurrentEl = document.querySelector(".stage__counter-current");
   const hint = document.querySelector(".bottombar__hint");
+  const aboutDialog = document.getElementById("about-dialog");
+  const aboutBtn = document.querySelector(".bottombar__about");
+
+  function isAboutOpen() {
+    return Boolean(aboutDialog && aboutDialog.open);
+  }
 
   const total = slides.length;
   let activeIndex = 0;
@@ -174,6 +180,7 @@
 
   /* --- Wheel --- */
   document.addEventListener("wheel", (e) => {
+    if (isAboutOpen()) return;
     e.preventDefault();
     if (wheelLocked) return;
 
@@ -192,6 +199,7 @@
 
   /* --- Keyboard --- */
   document.addEventListener("keydown", (e) => {
+    if (isAboutOpen()) return;
     if (e.key === "ArrowDown" || e.key === "ArrowRight") {
       e.preventDefault();
       next();
@@ -205,12 +213,13 @@
   let touchActive = false;
 
   document.addEventListener("touchstart", (e) => {
+    if (isAboutOpen()) return;
     touchStartY = e.touches[0].clientY;
     touchActive = true;
   }, { passive: true });
 
   document.addEventListener("touchmove", (e) => {
-    if (!touchActive) return;
+    if (!touchActive || isAboutOpen()) return;
     const dy = touchStartY - e.touches[0].clientY;
     if (Math.abs(dy) > SWIPE_THRESHOLD) {
       touchActive = false;
@@ -242,6 +251,23 @@
       if (url) navigateToProject(url);
     });
   });
+
+  /* --- About dialog --- */
+  if (aboutDialog && aboutBtn) {
+    aboutBtn.addEventListener("click", () => {
+      if (typeof aboutDialog.showModal === "function") {
+        aboutDialog.showModal();
+      } else {
+        aboutDialog.setAttribute("open", "");
+      }
+    });
+
+    aboutDialog.addEventListener("click", (e) => {
+      if (e.target === aboutDialog || e.target.closest("[data-close]")) {
+        aboutDialog.close();
+      }
+    });
+  }
 
   /* --- Init --- */
   positionSlides();

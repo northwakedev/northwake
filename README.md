@@ -32,4 +32,4 @@ Reach us at [contact@northwake.dev](mailto:contact@northwake.dev)
 
 ## License
 
-All rights reserved © 2025 Northwake
+All rights reserved © 2026 Northwake
