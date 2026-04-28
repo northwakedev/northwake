@@ -84,32 +84,99 @@
         var(--bg);
     }
 
-    /* ── Icon + ring ──────────────────────────────── */
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-10px); }
-    }
-    .icon-wrap { animation: float 6s ease-in-out infinite; }
-
-    @keyframes ring-fill {
-      from { stroke-dashoffset: 817; }
-      to   { stroke-dashoffset: 216; }
-    }
-    .ring-arc {
-      stroke-dasharray: 817;
-      stroke-dashoffset: 216;
-      animation: ring-fill 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
-    }
-
-    .app-icon {
-      position: relative;
-      z-index: 10;
-      width: 178px;
-      height: 178px;
-      border-radius: 22%;
+    /* ── Hero counter (matches in-app dark UI) ─────── */
+    .hero-counter-panel {
+      background: #0d0b09;
+      border: 1px solid rgba(210, 158, 123, 0.24);
+      border-radius: 1.375rem;
+      padding: 1.75rem 1.25rem 2rem;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
       box-shadow:
-        0 28px 60px rgba(var(--shadow-color), 0.22),
-        0 6px 18px rgba(var(--shadow-color), 0.1);
+        0 28px 56px rgba(0, 0, 0, 0.28),
+        0 8px 20px rgba(0, 0, 0, 0.14);
+    }
+    @media (prefers-color-scheme: dark) {
+      .hero-counter-panel {
+        box-shadow:
+          0 28px 56px rgba(0, 0, 0, 0.45),
+          0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+    }
+    .hero-counter-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.125rem;
+    }
+    .hero-counter-btn {
+      width: 2.75rem;
+      height: 2.75rem;
+      border: none;
+      background: transparent;
+      color: var(--accent);
+      font-size: 1.625rem;
+      font-weight: 300;
+      line-height: 1;
+      cursor: pointer;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.15s, transform 0.1s;
+      flex-shrink: 0;
+    }
+    .hero-counter-btn:hover  { opacity: 0.82; }
+    .hero-counter-btn:active { transform: scale(0.94); }
+    .hero-counter-btn:disabled {
+      opacity: 0.28;
+      cursor: default;
+      transform: none;
+    }
+    .hero-counter-ring-wrap {
+      position: relative;
+      width: 188px;
+      height: 188px;
+      flex-shrink: 0;
+    }
+    .hero-counter-num {
+      position: absolute;
+      top: 94px;
+      left: 94px;
+      width: 100px;
+      height: 52px;
+      transform: translate(-50%, -50%);
+      /* 'Times New Roman' uses lining figures (all digits same height
+         and on the same baseline). Georgia has old-style figures where
+         5/7/9 hang below the baseline, causing visible jumps. */
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 52px;
+      font-weight: 400;
+      line-height: 52px;
+      text-align: center;
+      font-variant-numeric: lining-nums tabular-nums;
+      font-feature-settings: "lnum" 1, "tnum" 1;
+      color: #f0ebe4;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .hero-counter-label {
+      text-align: center;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 0.35rem;
+    }
+    .hero-counter-hint {
+      text-align: center;
+      font-size: 0.7rem;
+      color: rgba(240, 235, 228, 0.42);
+      margin: 1rem 0 0;
+      line-height: 1.45;
     }
 
     /* ── Feature cards ────────────────────────────── */
@@ -186,6 +253,18 @@
       margin-right: auto;
     }
 
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
     /* ── Responsive helpers ───────────────────────── */
     .container {
       max-width: 1040px;
@@ -208,7 +287,7 @@
       <a href="../index.html" style="font-size:0.8rem; font-weight:700; letter-spacing:0.18em; color:var(--text); text-decoration:none; transition:color 0.2s ease;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text)'">NORTHWAKE</a>
       <div style="display:flex; align-items:center; gap:0.5rem;">
         <img
-          src="../assets/ply/app-icon.png"
+          src="../assets/ply/alpaca-icon-ply.png"
           alt="" aria-hidden="true"
           style="width:26px; height:26px; border-radius:22%; flex-shrink:0;"
         />
@@ -245,29 +324,31 @@
           <p style="font-size:0.78rem; color:var(--muted); margin-top:0.875rem;">One-time purchase &nbsp;·&nbsp; iPhone &amp; Apple Watch</p>
         </div>
 
-        <!-- Icon + ring (hidden on small screens via CSS grid column; visible on md+) -->
-        <div style="display:none;" id="hero-visual" aria-hidden="true">
-          <div class="icon-wrap" style="position:relative; width:280px; height:280px; display:flex; align-items:center; justify-content:center; margin:0 auto;">
-            <!-- Counter ring (decorative, mirrors in-app progress ring) -->
-            <svg style="position:absolute; inset:0; width:100%; height:100%;" viewBox="0 0 280 280" fill="none">
-              <!-- Track -->
-              <circle cx="140" cy="140" r="130" stroke="var(--accent)" stroke-width="2.5" opacity="0.13"/>
-              <!-- Progress arc -->
-              <circle
-                cx="140" cy="140" r="130"
-                stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"
-                class="ring-arc"
-                transform="rotate(-90 140 140)"
-              />
-              <!-- Subtle inner ring -->
-              <circle cx="140" cy="140" r="106" stroke="var(--accent)" stroke-width="1" opacity="0.07"/>
-            </svg>
-            <!-- App icon -->
-            <img
-              src="../assets/ply/app-icon.png"
-              alt="Ply app icon"
-              class="app-icon"
-            />
+        <!-- In-app style row counter (interactive demo) -->
+        <div id="hero-visual" role="group" aria-labelledby="hero-counter-title">
+          <p id="hero-counter-title" class="sr-only">Demo row counter</p>
+          <div class="hero-counter-panel">
+            <div class="hero-counter-row">
+              <button type="button" class="hero-counter-btn" id="hero-counter-dec" aria-label="Decrease row">−</button>
+              <div class="hero-counter-ring-wrap">
+                <svg width="188" height="188" viewBox="0 0 188 188" fill="none" style="display:block;" aria-hidden="true" focusable="false">
+                  <circle cx="94" cy="94" r="86" stroke="rgba(240,235,228,0.09)" stroke-width="3" fill="none"/>
+                  <circle
+                    id="hero-counter-progress"
+                    cx="94" cy="94" r="86"
+                    stroke="var(--accent)"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    fill="none"
+                    transform="rotate(-90 94 94)"
+                    style="stroke-dasharray: 0; stroke-dashoffset: 0;"
+                  />
+                </svg>
+                <span class="hero-counter-num" id="hero-counter-value" aria-live="polite">5</span>
+              </div>
+              <button type="button" class="hero-counter-btn" id="hero-counter-inc" aria-label="Increase row">+</button>
+            </div>
+            <p class="hero-counter-label">Row</p>
           </div>
         </div>
 
@@ -276,22 +357,48 @@
   </section>
 
   <script>
-    // Show hero visual only when there's room (768px+)
     (function () {
       var el = document.getElementById('hero-visual');
       var hero = el.parentElement;
-      function update() {
+      function layout() {
+        el.style.display = 'flex';
         if (window.innerWidth >= 768) {
-          el.style.display = 'flex';
           el.style.justifyContent = 'flex-end';
           hero.style.gridTemplateColumns = '1fr 1fr';
         } else {
-          el.style.display = 'none';
+          el.style.justifyContent = 'center';
           hero.style.gridTemplateColumns = '1fr';
         }
       }
-      update();
-      window.addEventListener('resize', update);
+      layout();
+      window.addEventListener('resize', layout);
+
+      var row = 5;
+      var goal = 16;
+      var r = 86;
+      var circumference = 2 * Math.PI * r;
+      var valueEl = document.getElementById('hero-counter-value');
+      var progressEl = document.getElementById('hero-counter-progress');
+      var decBtn = document.getElementById('hero-counter-dec');
+      var incBtn = document.getElementById('hero-counter-inc');
+      progressEl.style.strokeDasharray = String(circumference);
+      function render() {
+        valueEl.textContent = String(row);
+        var p = Math.min(Math.max(row, 0) / goal, 1);
+        progressEl.style.strokeDashoffset = String(circumference * (1 - p));
+        decBtn.disabled = row <= 0;
+      }
+      decBtn.addEventListener('click', function () {
+        if (row > 0) {
+          row--;
+          render();
+        }
+      });
+      incBtn.addEventListener('click', function () {
+        row++;
+        render();
+      });
+      render();
     })();
   </script>
 

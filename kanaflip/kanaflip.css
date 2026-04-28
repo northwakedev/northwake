@@ -209,6 +209,21 @@ body.kanaflip-page {
   background: rgba(255, 255, 255, 0.02);
 }
 
+.kanaflip__cta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.kanaflip__cta-note {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+
 .kanaflip__cta {
   display: inline-flex;
   align-items: center;
@@ -353,6 +368,10 @@ body.kanaflip-page {
 
   .kanaflip__chips {
     justify-content: center;
+  }
+
+  .kanaflip__cta-group {
+    align-items: center;
   }
 
   .kanaflip__hero {

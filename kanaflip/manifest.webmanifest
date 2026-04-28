@@ -1,0 +1,22 @@
+{
+  "name": "KanaFlip — Hiragana & Katakana",
+  "short_name": "KanaFlip",
+  "description": "Free iPhone app to learn Japanese hiragana and katakana. Flashcards, quizzes, spaced repetition, widget, and reminders.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "browser",
+  "icons": [
+    {
+      "src": "../assets/kanaflip/app-icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "itunes",
+      "url": "https://apps.apple.com/dk/app/kanaflip-hiragana-katakana/id6762548642"
+    }
+  ]
+}
