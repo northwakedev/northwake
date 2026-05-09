@@ -17,7 +17,7 @@ A minimalist digital studio specializing in web and mobile craftsmanship and int
 - HTML5
 - CSS3
 - Google Fonts (Inter)
-- No JavaScript (intentionally minimal)
+- Minimal vanilla JavaScript (carousel, dialog, and small per-page demos)
 
 ## Design Principles
 

@@ -3,12 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Northwake — Digital Studio</title>
-  <meta name="description" content="Northwake is a minimalist digital studio specializing in clean, scalable web and mobile experiences.">
+  <title>Northwake — Independent software studio</title>
+  <meta name="description" content="Northwake is a small independent studio making calm, useful software for Apple platforms — Habitori, KanaFlip, Monthfold, Zappsum, and Ply.">
+  <link rel="canonical" href="https://northwake.dev/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Northwake">
+  <meta property="og:title" content="Northwake — Independent software studio">
+  <meta property="og:description" content="Calm, useful software for Apple platforms. Habitori, KanaFlip, Monthfold, Zappsum, and Ply.">
+  <meta property="og:url" content="https://northwake.dev/">
+  <meta property="og:image" content="https://northwake.dev/images/hero.jpg">
+  <meta property="og:locale" content="en_US">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Northwake — Independent software studio">
+  <meta name="twitter:description" content="Calm, useful software for Apple platforms.">
+  <meta name="twitter:image" content="https://northwake.dev/images/hero.jpg">
+
   <link rel="icon" href="images/favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script defer src="https://cloud.umami.is/script.js" data-website-id="8b91c13a-1741-4610-928e-348ed407c286"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Northwake",
+    "url": "https://northwake.dev/",
+    "email": "hello@northwake.dev",
+    "logo": "https://northwake.dev/images/favicon.ico",
+    "description": "Independent software studio making calm, useful apps for Apple platforms.",
+    "makesOffer": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "MobileApplication",
+          "name": "Habitori",
+          "url": "https://habitori.app",
+          "operatingSystem": "iOS, watchOS"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "MobileApplication",
+          "name": "KanaFlip",
+          "url": "https://northwake.dev/kanaflip/",
+          "operatingSystem": "iOS"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "MobileApplication",
+          "name": "Monthfold",
+          "url": "https://northwake.dev/monthfold/",
+          "operatingSystem": "iOS, iPadOS, macOS, visionOS"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "MobileApplication",
+          "name": "Zappsum",
+          "url": "https://northwake.dev/zappsum/",
+          "operatingSystem": "iOS"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "MobileApplication",
+          "name": "Ply",
+          "url": "https://northwake.dev/ply/",
+          "operatingSystem": "iOS, watchOS"
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -37,39 +110,55 @@
                  data-title="Habitori"
                  data-desc="Private habit tracker for iPhone and Apple Watch."
                  data-href="https://habitori.app">
-          <div class="carousel__card carousel__card--has-image" style="--card-hue: 228;">
-            <img src="assets/habitori/hero.png" alt="Habitori app screens" class="carousel__card-image" loading="eager" decoding="async">
-            <img src="assets/habitori/habitkit-icon.png" alt="" class="carousel__card-icon" aria-hidden="true">
-          </div>
+          <a class="carousel__slide-link" href="https://habitori.app" target="_blank" rel="noopener noreferrer">
+            <h2 class="visually-hidden">Habitori</h2>
+            <p class="visually-hidden">Private habit tracker for iPhone and Apple Watch.</p>
+            <div class="carousel__card carousel__card--has-image" style="--card-hue: 228;">
+              <img src="assets/habitori/hero.png" alt="Habitori app screens" class="carousel__card-image" loading="eager" decoding="async">
+              <img src="assets/habitori/habitkit-icon.png" alt="" class="carousel__card-icon" aria-hidden="true">
+            </div>
+          </a>
         </article>
 
         <article class="carousel__slide" data-index="1" data-hue="258"
                  data-title="KanaFlip"
                  data-desc="Free on the App Store. Learn hiragana and katakana on iPhone—flashcards, quizzes, spaced repetition, widget, and reminders."
-                 data-href="kanaflip/index.html">
-          <div class="carousel__card carousel__card--has-image carousel__card--image-contain carousel__card--kanaflip" style="--card-hue: 258;">
-            <div class="kanaflip-card__wash" aria-hidden="true">あかさたなはまやらわいきしちにひみりゐうくすつぬふむゆるえけせてねへめれおこそとのほもよろを</div>
-            <img src="assets/kanaflip/Kana-phones.png" alt="KanaFlip: Hiragana flashcard, Home, Test, and Profile screens" class="carousel__card-image" loading="lazy" decoding="async">
-            <img src="assets/kanaflip/app-icon-128.png" alt="" class="carousel__card-icon" aria-hidden="true">
-          </div>
+                 data-href="kanaflip/">
+          <a class="carousel__slide-link" href="kanaflip/">
+            <h2 class="visually-hidden">KanaFlip</h2>
+            <p class="visually-hidden">Free on the App Store. Learn hiragana and katakana on iPhone with flashcards, quizzes, spaced repetition, a home screen widget, and daily reminders.</p>
+            <div class="carousel__card carousel__card--has-image carousel__card--image-contain carousel__card--kanaflip" style="--card-hue: 258;">
+              <div class="kanaflip-card__wash" aria-hidden="true">あかさたなはまやらわいきしちにひみりゐうくすつぬふむゆるえけせてねへめれおこそとのほもよろを</div>
+              <img src="assets/kanaflip/Kana-phones.png" alt="KanaFlip: Hiragana flashcard, Home, Test, and Profile screens" class="carousel__card-image" loading="lazy" decoding="async">
+              <img src="assets/kanaflip/app-icon-128.png" alt="" class="carousel__card-icon" aria-hidden="true">
+            </div>
+          </a>
         </article>
 
         <article class="carousel__slide" data-index="2" data-hue="145"
                  data-title="Monthfold"
                  data-desc="See your year at a glance — months side by side, every day visible at once."
-                 data-href="monthfold/index.html">
-          <div class="carousel__card carousel__card--has-image carousel__card--coming-soon" style="--card-hue: 145;">
-            <img src="assets/monthfold/monthfold.png" alt="Monthfold multi-month calendar planner" class="carousel__card-image" loading="lazy" decoding="async">
-          </div>
+                 data-href="monthfold/">
+          <a class="carousel__slide-link" href="monthfold/">
+            <h2 class="visually-hidden">Monthfold</h2>
+            <p class="visually-hidden">A multi-month calendar planner for iPhone, iPad, Mac, and Apple Vision Pro. See your year at a glance with months side by side and every day visible at once.</p>
+            <div class="carousel__card carousel__card--has-image carousel__card--coming-soon" style="--card-hue: 145;">
+              <img src="assets/monthfold/monthfold.png" alt="Monthfold multi-month calendar planner" class="carousel__card-image" loading="lazy" decoding="async">
+            </div>
+          </a>
         </article>
 
         <article class="carousel__slide" data-index="3" data-hue="250"
                  data-title="Zappsum"
                  data-desc="Mental math training for iOS — Speed Match battles, spaced repetition drills, and timed tests."
-                 data-href="zappsum/index.html">
-          <div class="carousel__card carousel__card--zappsum carousel__card--coming-soon" style="--card-hue: 250;">
-            <img src="assets/zappsum/zappsum-icon.png" alt="" class="zappsum-card__app-icon" aria-hidden="true" decoding="async">
-          </div>
+                 data-href="zappsum/">
+          <a class="carousel__slide-link" href="zappsum/">
+            <h2 class="visually-hidden">Zappsum</h2>
+            <p class="visually-hidden">Mental math training for iOS. Compete in Speed Match battles, drill weak spots with spaced repetition flashcards, and pass structured tests to climb your personal rating.</p>
+            <div class="carousel__card carousel__card--zappsum carousel__card--coming-soon" style="--card-hue: 250;">
+              <img src="assets/zappsum/zappsum-icon.png" alt="" class="zappsum-card__app-icon" aria-hidden="true" decoding="async">
+            </div>
+          </a>
         </article>
 
       </div>
@@ -88,7 +177,7 @@
     <div class="bottombar__meta">
       <button type="button" class="bottombar__about" aria-haspopup="dialog" aria-controls="about-dialog">About</button>
       <span class="bottombar__sep" aria-hidden="true">&middot;</span>
-      <p class="bottombar__copy">&copy; 2026 Northwake</p>
+      <p class="bottombar__copy">&copy; 2026 Northwake &middot; CVR 46120221 &middot; <a href="mailto:hello@northwake.dev">hello@northwake.dev</a></p>
     </div>
   </footer>
 

@@ -75,11 +75,14 @@
       // element and restoring it on the card inside lets adjacent slides
       // receive clicks while keeping the card's hover effect functional.
       const card = slide.querySelector(".carousel__card");
+      const link = slide.querySelector(".carousel__slide-link");
       if (offset === 0) {
         slide.style.pointerEvents = "none";
+        if (link) link.style.pointerEvents = "auto";
         if (card) card.style.pointerEvents = "auto";
       } else {
         slide.style.pointerEvents = "auto";
+        if (link) link.style.pointerEvents = "none";
         if (card) card.style.pointerEvents = "none";
       }
     });
@@ -146,23 +149,6 @@
     if (hintDismissed || !hint) return;
     hintDismissed = true;
     hint.classList.add("is-hidden");
-  }
-
-  /** URL for card click: optional data-card-href overrides data-href (e.g. promo page while stage link is Coming Soon). */
-  function getSlideNavigateHref(slide) {
-    const cardHref = slide.dataset.cardHref;
-    const href = slide.dataset.href;
-    const url = (cardHref && cardHref.trim()) || (href && href.trim());
-    if (!url || url === "#") return null;
-    return url;
-  }
-
-  function navigateToProject(url) {
-    if (/^https?:\/\//i.test(url)) {
-      window.open(url, "_blank", "noopener,noreferrer");
-    } else {
-      window.location.assign(url);
-    }
   }
 
   function goTo(index) {
@@ -239,16 +225,17 @@
     });
   });
 
-  /* --- Slide click: inactive = focus slide; active = open project URL --- */
+  /* --- Slide click: inactive = focus slide; active = let the wrapping <a> navigate --- */
   slides.forEach((slide) => {
-    slide.addEventListener("click", () => {
+    slide.addEventListener("click", (e) => {
       const idx = parseInt(slide.dataset.index, 10);
       if (idx !== activeIndex) {
+        // Inactive slide: belt-and-braces — pointer-events:none on the link
+        // already prevents the anchor from receiving the click, but if the
+        // event bubbled here from a focus/keyboard activation, intercept it.
+        e.preventDefault();
         goTo(idx);
-        return;
       }
-      const url = getSlideNavigateHref(slide);
-      if (url) navigateToProject(url);
     });
   });
 

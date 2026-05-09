@@ -92,6 +92,20 @@ button { font: inherit; border: none; background: none; cursor: pointer; color: 
 }
 
 
+/* --- Visually hidden (a11y + SEO content kept out of the visual layout) --- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
 /* ================================================
    TOP BAR
    ================================================ */
@@ -278,6 +292,26 @@ button { font: inherit; border: none; background: none; cursor: pointer; color: 
   pointer-events: auto;
   z-index: 3;
   opacity: 1;
+}
+
+/* Anchor wraps the card so each slide is a real, crawlable link. The link
+   stretches over the same area as the card and stays out of the way of the
+   3D layout — visuals are unchanged. */
+.carousel__slide-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+.carousel__slide-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 6px;
+  border-radius: var(--radius-lg);
 }
 
 .carousel__card {
