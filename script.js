@@ -78,7 +78,7 @@
       const link = slide.querySelector(".carousel__slide-link");
       if (offset === 0) {
         slide.style.pointerEvents = "none";
-        if (link) link.style.pointerEvents = "auto";
+        if (link) link.style.pointerEvents = "none";
         if (card) card.style.pointerEvents = "auto";
       } else {
         slide.style.pointerEvents = "auto";
